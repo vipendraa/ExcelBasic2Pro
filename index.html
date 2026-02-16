@@ -10,6 +10,57 @@
 
 <style>
 
+  /* TOP CONTROLS */
+
+.top-controls{
+position:relative;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+padding:0 20px;
+}
+
+.progress-box{
+width:45%;
+text-align:left;
+}
+
+.progress-text{
+font-size:14px;
+margin-bottom:6px;
+color:#4cffb2;
+}
+
+.progress-bar{
+height:10px;
+background:#1e3a52;
+border-radius:20px;
+overflow:hidden;
+}
+
+.progress-fill{
+height:100%;
+width:0%;
+background:#4cffb2;
+transition:.3s;
+}
+
+.reset-btn{
+padding:8px 14px;
+border:none;
+border-radius:8px;
+background:#ff5757;
+color:white;
+cursor:pointer;
+font-size:13px;
+}
+
+.reset-btn:hover{
+opacity:.85;
+}
+
+
 body{
 margin:0;
 font-family:Poppins;
@@ -136,6 +187,20 @@ border-radius:6px;
 
 <div class="path"></div>
 
+  <div class="top-controls">
+
+    <div class="progress-box">
+        <div class="progress-text">Progress: <span id="progressPercent">0%</span></div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+    </div>
+
+    <button class="reset-btn" onclick="resetProgress()">Reset Progress</button>
+
+</div>
+
+
 <div class="phase">Phase 1 — Excel Basics</div>
 
 <div class="level left"><div class="circle">1</div><div class="label">Excel Interface</div></div>
@@ -211,9 +276,11 @@ c.classList.add("completed");
 localStorage.setItem("topic"+i,"done");
 
 unlock();
+updateProgress();
 
 });
 });
+
 
 function unlock(){
 
@@ -228,6 +295,38 @@ c.classList.remove("locked");
 });
 
 }
+
+  function updateProgress(){
+
+let completed=document.querySelectorAll(".circle.completed").length;
+let total=levels.length;
+
+let percent=Math.round((completed/total)*100);
+
+document.getElementById("progressFill").style.width=percent+"%";
+document.getElementById("progressPercent").innerText=percent+"%";
+
+}
+
+function resetProgress(){
+
+if(confirm("Reset all progress?")){
+
+localStorage.clear();
+
+levels.forEach(c=>{
+c.classList.remove("completed");
+c.classList.add("locked");
+});
+
+levels[0].classList.remove("locked");
+
+updateProgress();
+
+}
+
+}
+
 
 </script>
 
