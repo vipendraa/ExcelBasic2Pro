@@ -66,13 +66,21 @@ transition:0.4s;
 /* GRID */
 
 .grid{
-max-width:1300px;
+max-width:1200px;
 margin:auto;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:20px;
 padding:20px;
+display:flex;
+flex-direction:column;
+gap:30px;
 }
+
+.row{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
 
 /* CARD */
 
@@ -183,6 +191,9 @@ font-size:13px;
 
 <div class="grid">
 
+<!-- ROW 1 -->
+<div class="row">
+
 <div class="card p1" id="phase1">
 <div class="phase-dot p1"></div>
 <h3>Excel Basics</h3>
@@ -218,6 +229,12 @@ font-size:13px;
 <label class="topic"><input type="checkbox">CONCAT</label>
 <label class="topic"><input type="checkbox">Absolute Ref</label>
 </div>
+
+</div>
+
+
+<!-- ROW 2 -->
+<div class="row">
 
 <div class="card locked" id="phase4">
 <div class="phase-dot p4"></div>
