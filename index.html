@@ -5,86 +5,143 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Excel Basic2Pro</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
 
-body{
-    font-family: Arial, sans-serif;
+*{
     margin:0;
-    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background: radial-gradient(circle at top,#0f2a44,#081421 70%);
     color:white;
+    min-height:100vh;
 }
 
-.container{
-    max-width:1200px;
-    margin:auto;
-    padding:20px;
-}
+/* HEADER */
 
-h1{
+.header{
     text-align:center;
-    color:#00ff9c;
-    margin-bottom:20px;
+    padding:40px 20px 10px;
 }
+
+.header h1{
+    color:#4cffb2;
+    font-size:34px;
+    font-weight:700;
+}
+
+.subtitle{
+    opacity:.7;
+    margin-top:5px;
+}
+
+/* STATS */
 
 .stats{
     display:flex;
-    gap:20px;
     justify-content:center;
+    gap:20px;
     flex-wrap:wrap;
-    margin-bottom:30px;
+    margin:30px 0;
 }
 
-.box{
-    background:#1e2a38;
-    padding:15px 25px;
-    border-radius:10px;
+.stat-box{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.08);
+    backdrop-filter:blur(10px);
+    padding:18px 28px;
+    border-radius:14px;
     text-align:center;
     min-width:120px;
 }
 
-.progress-container{
-    width:300px;
+.stat-box h2{
+    color:#4cffb2;
 }
 
 .progress-bar{
-    background:#333;
+    width:200px;
+    height:8px;
+    background:#1b2d42;
     border-radius:20px;
-    overflow:hidden;
-    height:20px;
     margin-top:8px;
+    overflow:hidden;
 }
 
 .progress{
     height:100%;
     width:0%;
-    background:#00ff9c;
+    background:linear-gradient(90deg,#4cffb2,#00e0ff);
 }
 
-.phases{
+/* PHASE GRID */
+
+.grid{
+    max-width:1300px;
+    margin:auto;
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
     gap:20px;
+    padding:20px;
 }
+
+/* CARDS */
 
 .card{
-    background:#1e2a38;
+    background:linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:18px;
     padding:20px;
-    border-radius:12px;
+    position:relative;
+    box-shadow:0 0 30px rgba(0,0,0,0.4);
+    transition:.3s;
 }
+
+.card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 0 40px rgba(0,255,200,0.2);
+}
+
+.phase-dot{
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    margin-bottom:10px;
+}
+
+.phase1{background:#4cffb2;}
+.phase2{background:#ffd84c;}
+.phase3{background:#4ca6ff;}
+.phase4{background:#a86bff;}
+.phase5{background:#ff7b7b;}
 
 .card h3{
-    color:#00ff9c;
+    margin-bottom:10px;
 }
 
-label{
-    display:block;
-    margin:8px 0;
+.topic{
+    display:flex;
+    align-items:center;
+    margin:6px 0;
+    font-size:14px;
     cursor:pointer;
 }
 
-input[type="checkbox"]{
+.topic input{
     margin-right:8px;
-    transform:scale(1.2);
+    transform:scale(1.1);
+}
+
+.footer{
+    text-align:center;
+    opacity:.6;
+    padding:20px;
+    font-size:13px;
 }
 
 </style>
@@ -92,130 +149,147 @@ input[type="checkbox"]{
 
 <body>
 
-<div class="container">
+<div class="header">
+    <h1>Microsoft Excel: Basic to Pro</h1>
+    <div class="subtitle">Complete Course Roadmap</div>
+</div>
 
-<h1>Excel Basic2Pro</h1>
 
 <div class="stats">
 
-<div class="box">
+<div class="stat-box">
 <h2>5</h2>
-<p>Phases</p>
+<p>PHASES</p>
 </div>
 
-<div class="box">
-<h2 id="topicCount">35</h2>
-<p>Topics</p>
+<div class="stat-box">
+<h2 id="topics">35</h2>
+<p>TOPICS</p>
 </div>
 
-<div class="box progress-container">
-<p>Progress: <span id="percent">0%</span></p>
+<div class="stat-box">
+<h2 id="done">0</h2>
+<p>DONE</p>
+</div>
+
+<div class="stat-box">
+<p id="percent">0%</p>
+<p>PROGRESS</p>
 <div class="progress-bar">
-<div class="progress" id="progressBar"></div>
+<div class="progress" id="bar"></div>
 </div>
 </div>
 
 </div>
 
 
-<div class="phases">
+<div class="grid">
 
-<!-- Phase 1 -->
+<!-- PHASE 1 -->
 <div class="card">
-<h3>Phase 1 — Excel Basics</h3>
+<div class="phase-dot phase1"></div>
+<h3>Excel Basics (Foundation)</h3>
 
-<label><input type="checkbox">Excel interface</label>
-<label><input type="checkbox">Rows & Columns</label>
-<label><input type="checkbox">Data entry</label>
-<label><input type="checkbox">Formatting</label>
-<label><input type="checkbox">SUM</label>
-<label><input type="checkbox">AVERAGE</label>
-<label><input type="checkbox">COUNT</label>
+<label class="topic"><input type="checkbox">Excel interface</label>
+<label class="topic"><input type="checkbox">Rows / Columns</label>
+<label class="topic"><input type="checkbox">Data entry</label>
+<label class="topic"><input type="checkbox">Formatting</label>
+<label class="topic"><input type="checkbox">SUM AVERAGE COUNT</label>
+<label class="topic"><input type="checkbox">Autofill</label>
+<label class="topic"><input type="checkbox">Save & Print</label>
 
 </div>
 
-<!-- Phase 2 -->
+<!-- PHASE 2 -->
 <div class="card">
-<h3>Phase 2 — Practical Excel</h3>
+<div class="phase-dot phase2"></div>
+<h3>Practical Excel (Real Files)</h3>
 
-<label><input type="checkbox">Salary Sheet</label>
-<label><input type="checkbox">Attendance Sheet</label>
-<label><input type="checkbox">Marksheet</label>
-<label><input type="checkbox">Bill Invoice</label>
-<label><input type="checkbox">Sort & Filter</label>
-<label><input type="checkbox">Conditional Formatting</label>
-<label><input type="checkbox">Data Validation</label>
+<label class="topic"><input type="checkbox">Salary Sheet</label>
+<label class="topic"><input type="checkbox">Attendance</label>
+<label class="topic"><input type="checkbox">Marksheet</label>
+<label class="topic"><input type="checkbox">Invoice</label>
+<label class="topic"><input type="checkbox">Sort & Filter</label>
+<label class="topic"><input type="checkbox">Conditional Formatting</label>
+<label class="topic"><input type="checkbox">Data Validation</label>
 
 </div>
 
-<!-- Phase 3 -->
+<!-- PHASE 3 -->
 <div class="card">
-<h3>Phase 3 — Formula Mastery</h3>
+<div class="phase-dot phase3"></div>
+<h3>Formula Mastery</h3>
 
-<label><input type="checkbox">IF Formula</label>
-<label><input type="checkbox">VLOOKUP</label>
-<label><input type="checkbox">HLOOKUP</label>
-<label><input type="checkbox">XLOOKUP</label>
-<label><input type="checkbox">LEFT RIGHT MID</label>
-<label><input type="checkbox">COUNTIF SUMIF</label>
-<label><input type="checkbox">Absolute Reference</label>
+<label class="topic"><input type="checkbox">IF Formula</label>
+<label class="topic"><input type="checkbox">VLOOKUP</label>
+<label class="topic"><input type="checkbox">HLOOKUP / XLOOKUP</label>
+<label class="topic"><input type="checkbox">LEFT RIGHT MID</label>
+<label class="topic"><input type="checkbox">COUNTIF SUMIF</label>
+<label class="topic"><input type="checkbox">CONCAT</label>
+<label class="topic"><input type="checkbox">Absolute Reference</label>
 
 </div>
 
-<!-- Phase 4 -->
+<!-- PHASE 4 -->
 <div class="card">
-<h3>Phase 4 — Data Analysis</h3>
+<div class="phase-dot phase4"></div>
+<h3>Data Handling & Analysis</h3>
 
-<label><input type="checkbox">Text to Columns</label>
-<label><input type="checkbox">Pivot Table</label>
-<label><input type="checkbox">Charts</label>
-<label><input type="checkbox">Dashboard</label>
-<label><input type="checkbox">Find & Replace</label>
-<label><input type="checkbox">Freeze Panes</label>
-<label><input type="checkbox">Go To</label>
+<label class="topic"><input type="checkbox">Text to Columns</label>
+<label class="topic"><input type="checkbox">Pivot Table</label>
+<label class="topic"><input type="checkbox">Charts</label>
+<label class="topic"><input type="checkbox">Dashboard</label>
+<label class="topic"><input type="checkbox">Find & Replace</label>
+<label class="topic"><input type="checkbox">Freeze Panes</label>
+<label class="topic"><input type="checkbox">Go To</label>
 
 </div>
 
-<!-- Phase 5 -->
+<!-- PHASE 5 -->
 <div class="card">
-<h3>Phase 5 — Advanced Excel</h3>
+<div class="phase-dot phase5"></div>
+<h3>Pro Level (Advanced)</h3>
 
-<label><input type="checkbox">Named Ranges</label>
-<label><input type="checkbox">INDEX MATCH</label>
-<label><input type="checkbox">Nested IF</label>
-<label><input type="checkbox">OFFSET</label>
-<label><input type="checkbox">Power Query</label>
-<label><input type="checkbox">Advanced Pivot</label>
-<label><input type="checkbox">Data Modeling</label>
+<label class="topic"><input type="checkbox">Named Ranges</label>
+<label class="topic"><input type="checkbox">INDEX MATCH</label>
+<label class="topic"><input type="checkbox">Nested IF</label>
+<label class="topic"><input type="checkbox">OFFSET</label>
+<label class="topic"><input type="checkbox">Power Query</label>
+<label class="topic"><input type="checkbox">Advanced Pivot</label>
+<label class="topic"><input type="checkbox">Data Modeling</label>
 
 </div>
 
 </div>
 
+
+<div class="footer">
+Click topics as you learn them — progress updates automatically
 </div>
 
 
 <script>
 
-const checkboxes = document.querySelectorAll("input[type='checkbox']");
-const progressBar = document.getElementById("progressBar");
-const percentText = document.getElementById("percent");
+const checks = document.querySelectorAll("input[type='checkbox']");
+const bar = document.getElementById("bar");
+const percent = document.getElementById("percent");
+const done = document.getElementById("done");
 
-const totalTopics = checkboxes.length;
+const total = checks.length;
 
-checkboxes.forEach(cb => {
-    cb.addEventListener("change", updateProgress);
+checks.forEach(c=>{
+    c.addEventListener("change",update);
 });
 
-function updateProgress(){
+function update(){
 
-    let checked = document.querySelectorAll("input[type='checkbox']:checked").length;
+    let completed = document.querySelectorAll("input:checked").length;
 
-    let percent = Math.round((checked / totalTopics) * 100);
+    let p = Math.round((completed/total)*100);
 
-    progressBar.style.width = percent + "%";
-    percentText.innerText = percent + "%";
-
+    bar.style.width = p+"%";
+    percent.innerText = p+"%";
+    done.innerText = completed;
 }
 
 </script>
