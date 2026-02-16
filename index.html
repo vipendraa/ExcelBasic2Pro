@@ -3,145 +3,144 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Excel Basic2Pro</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins;}
 
 body{
-    background: radial-gradient(circle at top,#0f2a44,#081421 70%);
-    color:white;
-    min-height:100vh;
+background: radial-gradient(circle at top,#0f2a44,#081421 70%);
+color:white;
+min-height:100vh;
 }
 
 /* HEADER */
 
-.header{
-    text-align:center;
-    padding:40px 20px 10px;
-}
+.header{text-align:center;padding:40px 20px;}
 
 .header h1{
-    color:#4cffb2;
-    font-size:34px;
-    font-weight:700;
+color:#4cffb2;
+font-size:32px;
 }
 
-.subtitle{
-    opacity:.7;
-    margin-top:5px;
-}
+.subtitle{opacity:.7;margin-top:5px}
 
 /* STATS */
 
 .stats{
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    flex-wrap:wrap;
-    margin:30px 0;
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+margin-bottom:20px;
 }
 
-.stat-box{
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.08);
-    backdrop-filter:blur(10px);
-    padding:18px 28px;
-    border-radius:14px;
-    text-align:center;
-    min-width:120px;
-}
-
-.stat-box h2{
-    color:#4cffb2;
+.box{
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.08);
+padding:18px 26px;
+border-radius:14px;
+text-align:center;
+min-width:120px;
 }
 
 .progress-bar{
-    width:200px;
-    height:8px;
-    background:#1b2d42;
-    border-radius:20px;
-    margin-top:8px;
-    overflow:hidden;
+height:10px;
+background:#1b2d42;
+border-radius:20px;
+overflow:hidden;
+margin-top:8px;
 }
 
 .progress{
-    height:100%;
-    width:0%;
-    background:linear-gradient(90deg,#4cffb2,#00e0ff);
+height:100%;
+width:0%;
+background:linear-gradient(90deg,#4cffb2,#00e0ff);
+transition:0.4s;
 }
 
-/* PHASE GRID */
+/* GRID */
 
 .grid{
-    max-width:1300px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-    gap:20px;
-    padding:20px;
+max-width:1300px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:20px;
+padding:20px;
 }
 
-/* CARDS */
+/* CARD */
 
 .card{
-    background:linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));
-    border:1px solid rgba(255,255,255,0.08);
-    border-radius:18px;
-    padding:20px;
-    position:relative;
-    box-shadow:0 0 30px rgba(0,0,0,0.4);
-    transition:.3s;
+background:linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));
+border:1px solid rgba(255,255,255,0.08);
+border-radius:18px;
+padding:20px;
+transition:.3s;
+position:relative;
+}
+
+.card.locked{
+opacity:.4;
+pointer-events:none;
 }
 
 .card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 0 40px rgba(0,255,200,0.2);
+transform:translateY(-6px);
+box-shadow:0 0 40px rgba(0,255,200,0.2);
 }
 
 .phase-dot{
-    width:14px;
-    height:14px;
-    border-radius:50%;
-    margin-bottom:10px;
+width:14px;
+height:14px;
+border-radius:50%;
+margin-bottom:10px;
 }
 
-.phase1{background:#4cffb2;}
-.phase2{background:#ffd84c;}
-.phase3{background:#4ca6ff;}
-.phase4{background:#a86bff;}
-.phase5{background:#ff7b7b;}
-
-.card h3{
-    margin-bottom:10px;
-}
+.p1{background:#4cffb2}
+.p2{background:#ffd84c}
+.p3{background:#4ca6ff}
+.p4{background:#a86bff}
+.p5{background:#ff7b7b}
 
 .topic{
-    display:flex;
-    align-items:center;
-    margin:6px 0;
-    font-size:14px;
-    cursor:pointer;
+display:block;
+margin:6px 0;
+font-size:14px;
+cursor:pointer;
 }
 
-.topic input{
-    margin-right:8px;
-    transform:scale(1.1);
+input{margin-right:8px}
+
+/* BUTTONS */
+
+.actions{
+text-align:center;
+margin:20px;
 }
+
+button{
+padding:10px 18px;
+border:none;
+border-radius:8px;
+margin:5px;
+cursor:pointer;
+font-weight:600;
+}
+
+.reset{background:#ff5757;color:white}
+.certificate{background:#4cffb2;color:black}
 
 .footer{
-    text-align:center;
-    opacity:.6;
-    padding:20px;
-    font-size:13px;
+text-align:center;
+opacity:.6;
+padding:20px;
+font-size:13px;
 }
 
 </style>
@@ -150,29 +149,28 @@ body{
 <body>
 
 <div class="header">
-    <h1>Microsoft Excel: Basic to Pro</h1>
-    <div class="subtitle">Complete Course Roadmap</div>
+<h1>Microsoft Excel: Basic to Pro</h1>
+<div class="subtitle">Complete Course Roadmap</div>
 </div>
-
 
 <div class="stats">
 
-<div class="stat-box">
+<div class="box">
 <h2>5</h2>
 <p>PHASES</p>
 </div>
 
-<div class="stat-box">
+<div class="box">
 <h2 id="topics">35</h2>
 <p>TOPICS</p>
 </div>
 
-<div class="stat-box">
+<div class="box">
 <h2 id="done">0</h2>
 <p>DONE</p>
 </div>
 
-<div class="stat-box">
+<div class="box">
 <p id="percent">0%</p>
 <p>PROGRESS</p>
 <div class="progress-bar">
@@ -185,111 +183,189 @@ body{
 
 <div class="grid">
 
-<!-- PHASE 1 -->
-<div class="card">
-<div class="phase-dot phase1"></div>
-<h3>Excel Basics (Foundation)</h3>
-
-<label class="topic"><input type="checkbox">Excel interface</label>
-<label class="topic"><input type="checkbox">Rows / Columns</label>
-<label class="topic"><input type="checkbox">Data entry</label>
+<div class="card p1" id="phase1">
+<div class="phase-dot p1"></div>
+<h3>Excel Basics</h3>
+<label class="topic"><input type="checkbox">Interface</label>
+<label class="topic"><input type="checkbox">Rows Columns</label>
+<label class="topic"><input type="checkbox">Data Entry</label>
 <label class="topic"><input type="checkbox">Formatting</label>
 <label class="topic"><input type="checkbox">SUM AVERAGE COUNT</label>
 <label class="topic"><input type="checkbox">Autofill</label>
-<label class="topic"><input type="checkbox">Save & Print</label>
-
+<label class="topic"><input type="checkbox">Save Print</label>
 </div>
 
-<!-- PHASE 2 -->
-<div class="card">
-<div class="phase-dot phase2"></div>
-<h3>Practical Excel (Real Files)</h3>
-
+<div class="card locked" id="phase2">
+<div class="phase-dot p2"></div>
+<h3>Practical Excel</h3>
 <label class="topic"><input type="checkbox">Salary Sheet</label>
 <label class="topic"><input type="checkbox">Attendance</label>
 <label class="topic"><input type="checkbox">Marksheet</label>
 <label class="topic"><input type="checkbox">Invoice</label>
-<label class="topic"><input type="checkbox">Sort & Filter</label>
+<label class="topic"><input type="checkbox">Sort Filter</label>
 <label class="topic"><input type="checkbox">Conditional Formatting</label>
 <label class="topic"><input type="checkbox">Data Validation</label>
-
 </div>
 
-<!-- PHASE 3 -->
-<div class="card">
-<div class="phase-dot phase3"></div>
+<div class="card locked" id="phase3">
+<div class="phase-dot p3"></div>
 <h3>Formula Mastery</h3>
-
-<label class="topic"><input type="checkbox">IF Formula</label>
+<label class="topic"><input type="checkbox">IF</label>
 <label class="topic"><input type="checkbox">VLOOKUP</label>
-<label class="topic"><input type="checkbox">HLOOKUP / XLOOKUP</label>
+<label class="topic"><input type="checkbox">XLOOKUP</label>
 <label class="topic"><input type="checkbox">LEFT RIGHT MID</label>
 <label class="topic"><input type="checkbox">COUNTIF SUMIF</label>
 <label class="topic"><input type="checkbox">CONCAT</label>
-<label class="topic"><input type="checkbox">Absolute Reference</label>
-
+<label class="topic"><input type="checkbox">Absolute Ref</label>
 </div>
 
-<!-- PHASE 4 -->
-<div class="card">
-<div class="phase-dot phase4"></div>
-<h3>Data Handling & Analysis</h3>
-
-<label class="topic"><input type="checkbox">Text to Columns</label>
+<div class="card locked" id="phase4">
+<div class="phase-dot p4"></div>
+<h3>Data Analysis</h3>
+<label class="topic"><input type="checkbox">Text Columns</label>
 <label class="topic"><input type="checkbox">Pivot Table</label>
 <label class="topic"><input type="checkbox">Charts</label>
 <label class="topic"><input type="checkbox">Dashboard</label>
-<label class="topic"><input type="checkbox">Find & Replace</label>
-<label class="topic"><input type="checkbox">Freeze Panes</label>
+<label class="topic"><input type="checkbox">Find Replace</label>
+<label class="topic"><input type="checkbox">Freeze</label>
 <label class="topic"><input type="checkbox">Go To</label>
-
 </div>
 
-<!-- PHASE 5 -->
-<div class="card">
-<div class="phase-dot phase5"></div>
-<h3>Pro Level (Advanced)</h3>
-
+<div class="card locked" id="phase5">
+<div class="phase-dot p5"></div>
+<h3>Advanced Excel</h3>
 <label class="topic"><input type="checkbox">Named Ranges</label>
 <label class="topic"><input type="checkbox">INDEX MATCH</label>
 <label class="topic"><input type="checkbox">Nested IF</label>
 <label class="topic"><input type="checkbox">OFFSET</label>
 <label class="topic"><input type="checkbox">Power Query</label>
 <label class="topic"><input type="checkbox">Advanced Pivot</label>
-<label class="topic"><input type="checkbox">Data Modeling</label>
-
+<label class="topic"><input type="checkbox">Data Model</label>
 </div>
 
 </div>
 
+
+<div class="actions">
+<button class="certificate" onclick="downloadCertificate()">Download Certificate</button>
+<button class="reset" onclick="resetProgress()">Reset Progress</button>
+</div>
 
 <div class="footer">
-Click topics as you learn them — progress updates automatically
+Progress saves automatically in your browser
 </div>
 
 
 <script>
 
-const checks = document.querySelectorAll("input[type='checkbox']");
-const bar = document.getElementById("bar");
-const percent = document.getElementById("percent");
-const done = document.getElementById("done");
+const checks=document.querySelectorAll("input[type='checkbox']");
+const bar=document.getElementById("bar");
+const percent=document.getElementById("percent");
+const done=document.getElementById("done");
 
-const total = checks.length;
+const total=checks.length;
 
-checks.forEach(c=>{
-    c.addEventListener("change",update);
+/* LOAD SAVED */
+
+checks.forEach((c,i)=>{
+let saved=localStorage.getItem("check"+i);
+if(saved==="true") c.checked=true;
 });
+
+update();
+
+/* EVENTS */
+
+checks.forEach((c,i)=>{
+c.addEventListener("change",()=>{
+localStorage.setItem("check"+i,c.checked);
+update();
+});
+});
+
 
 function update(){
 
-    let completed = document.querySelectorAll("input:checked").length;
+let completed=document.querySelectorAll("input:checked").length;
 
-    let p = Math.round((completed/total)*100);
+let p=Math.round((completed/total)*100);
 
-    bar.style.width = p+"%";
-    percent.innerText = p+"%";
-    done.innerText = completed;
+bar.style.width=p+"%";
+percent.innerText=p+"%";
+done.innerText=completed;
+
+unlockPhases();
+
+}
+
+
+/* PHASE UNLOCK */
+
+function unlockPhases(){
+
+let phase1done=[...document.querySelectorAll("#phase1 input")].every(i=>i.checked);
+let phase2done=[...document.querySelectorAll("#phase2 input")].every(i=>i.checked);
+let phase3done=[...document.querySelectorAll("#phase3 input")].every(i=>i.checked);
+let phase4done=[...document.querySelectorAll("#phase4 input")].every(i=>i.checked);
+
+if(phase1done) document.getElementById("phase2").classList.remove("locked");
+if(phase2done) document.getElementById("phase3").classList.remove("locked");
+if(phase3done) document.getElementById("phase4").classList.remove("locked");
+if(phase4done) document.getElementById("phase5").classList.remove("locked");
+
+}
+
+
+/* RESET */
+
+function resetProgress(){
+
+if(confirm("Reset all progress?")){
+localStorage.clear();
+location.reload();
+}
+
+}
+
+
+/* CERTIFICATE */
+
+function downloadCertificate(){
+
+let completed=document.querySelectorAll("input:checked").length;
+
+if(completed<total){
+alert("Complete course to unlock certificate");
+return;
+}
+
+let name=prompt("Enter your name");
+
+let canvas=document.createElement("canvas");
+canvas.width=1000;
+canvas.height=700;
+
+let ctx=canvas.getContext("2d");
+
+ctx.fillStyle="#0f2a44";
+ctx.fillRect(0,0,1000,700);
+
+ctx.fillStyle="#4cffb2";
+ctx.font="40px Poppins";
+ctx.fillText("Certificate of Completion",250,150);
+
+ctx.fillStyle="white";
+ctx.font="30px Poppins";
+ctx.fillText(name,420,300);
+
+ctx.font="20px Poppins";
+ctx.fillText("Microsoft Excel Basic to Pro",330,380);
+
+let link=document.createElement("a");
+link.download="certificate.png";
+link.href=canvas.toDataURL();
+link.click();
+
 }
 
 </script>
