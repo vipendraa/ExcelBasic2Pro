@@ -4,410 +4,221 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Excel Basic2Pro</title>
+<title>Excel Basic2Pro Roadmap</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
 body{
-background: radial-gradient(circle at top,#0f2a44,#07111b 70%);
+margin:0;
+font-family:Poppins;
+background:linear-gradient(180deg,#0b1724,#07111b);
 color:white;
-min-height:100vh;
-overflow-x:hidden;
-}
-
-/* HEADER */
-
-.header{
 text-align:center;
-padding:40px 20px 10px;
 }
 
-.header h1{
-font-size:36px;
-background:linear-gradient(90deg,#4cffb2,#00e0ff);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-
-.subtitle{
-opacity:.7;
-margin-top:8px;
-}
-
-/* STATS PANEL */
-
-.stats{
-display:flex;
-justify-content:center;
-gap:20px;
-flex-wrap:wrap;
-margin:30px 0;
-}
-
-.box{
-background:rgba(255,255,255,0.06);
-border:1px solid rgba(255,255,255,0.12);
-backdrop-filter:blur(20px);
-padding:18px 26px;
-border-radius:16px;
-text-align:center;
-min-width:130px;
-box-shadow:0 0 30px rgba(0,255,200,0.08);
-}
-
-.box h2{
+h1{
+margin:20px;
 color:#4cffb2;
 }
 
-/* PROGRESS BAR */
+/* ROAD */
 
-.progress-bar{
-height:10px;
-background:#132536;
-border-radius:20px;
-overflow:hidden;
-margin-top:10px;
-}
-
-.progress{
-height:100%;
-width:0%;
-background:linear-gradient(90deg,#4cffb2,#00e0ff);
-transition:.4s;
-}
-
-/* GRID */
-
-.grid{
-max-width:1200px;
-margin:auto;
-padding:20px;
-display:flex;
-flex-direction:column;
-gap:40px;
-}
-
-.row{
-display:flex;
-justify-content:center;
-gap:25px;
-flex-wrap:wrap;
-}
-
-/* CARD */
-
-.card{
-width:260px;
-background:rgba(255,255,255,0.04);
-border:1px solid rgba(255,255,255,0.08);
-border-radius:16px;
-padding:20px;
+.road{
 position:relative;
-backdrop-filter:blur(12px);
-box-shadow:0 4px 12px rgba(0,0,0,0.25);
-transition:.3s;
+width:100%;
+max-width:420px;
+margin:auto;
+padding:40px 0;
 }
 
-.card:hover{
-transform:translateY(-4px);
-box-shadow:0 6px 16px rgba(0,0,0,0.35);
-}
-
-.locked{
-opacity:.35;
-filter:blur(1px);
-pointer-events:none;
-}
-
-/* PHASE DOT */
-
-.phase-dot{
-width:12px;
-height:12px;
-border-radius:50%;
-margin-bottom:10px;
-}
-
-
-.p1{background:#4cffb2}
-.p2{background:#ffd84c}
-.p3{background:#4ca6ff}
-.p4{background:#a86bff}
-.p5{background:#ff7b7b}
-
-/* TOPIC */
-
-.topic{
-display:block;
-margin:6px 0;
-font-size:14px;
-cursor:pointer;
-transition:.2s;
-}
-
-.topic:hover{
-color:#ffffff;
-text-shadow:0 0 8px rgba(76,255,178,0.8);
-}
-
-input{
-margin-right:8px;
-transform:scale(1.1);
-}
-
-/* BUTTONS */
-
-.actions{
-text-align:center;
-margin:30px;
-}
-
-button{
-padding:12px 20px;
-border:none;
+.path{
+position:absolute;
+left:50%;
+top:0;
+width:6px;
+height:100%;
+background:#1e3a52;
+transform:translateX(-50%);
 border-radius:10px;
-margin:6px;
+}
+
+/* LEVEL */
+
+.level{
+position:relative;
+margin:50px 0;
+display:flex;
+align-items:center;
+}
+
+.left{
+justify-content:flex-start;
+padding-left:30px;
+}
+
+.right{
+justify-content:flex-end;
+padding-right:30px;
+}
+
+.circle{
+width:65px;
+height:65px;
+border-radius:50%;
+background:#1e3a52;
+display:flex;
+align-items:center;
+justify-content:center;
 cursor:pointer;
-font-weight:600;
 transition:.3s;
+font-size:14px;
 }
 
-.reset{
-background:#ff5757;
-color:white;
-}
-
-.reset:hover{
-transform:scale(1.05);
-}
-
-.certificate{
-background:linear-gradient(90deg,#4cffb2,#00e0ff);
+.completed{
+background:#4cffb2;
 color:black;
 }
 
-.certificate:hover{
-transform:scale(1.05);
-}
-
-/* FOOTER */
-
-.footer{
-text-align:center;
-opacity:.6;
-padding:20px;
-font-size:13px;
-}
-
-  body{
-color:#e6edf3;
-}
-
-.card{
-color:#f1f5f9;
-}
-
- .locked{
-opacity:0.45;
-filter:grayscale(60%);
+.locked{
+opacity:.4;
 pointer-events:none;
 }
 
-.card:not(.locked){
-filter:none !important;
-opacity:1 !important;
+.current{
+box-shadow:0 0 15px rgba(76,255,178,.6);
+border:2px solid #4cffb2;
 }
- 
 
+/* LABEL */
+
+.label{
+position:absolute;
+top:70px;
+width:160px;
+font-size:13px;
+}
+
+.left .label{
+left:0;
+text-align:left;
+}
+
+.right .label{
+right:0;
+text-align:right;
+}
+
+/* PHASE TITLE */
+
+.phase{
+margin:30px 0 10px;
+font-weight:600;
+color:#00e0ff;
+}
 
 </style>
 </head>
 
 <body>
 
-<div class="header">
-<h1>Microsoft Excel: Basic to Pro</h1>
-<div class="subtitle">Complete Course Roadmap</div>
-</div>
+<h1>Excel Basic2Pro Roadmap</h1>
 
+<div class="road">
 
-<div class="stats">
+<div class="path"></div>
 
-<div class="box">
-<h2>5</h2>
-<p>PHASES</p>
-</div>
+<div class="phase">Phase 1 — Excel Basics</div>
 
-<div class="box">
-<h2 id="topics">35</h2>
-<p>TOPICS</p>
-</div>
+<div class="level left"><div class="circle">1</div><div class="label">Excel Interface</div></div>
+<div class="level right"><div class="circle locked">2</div><div class="label">Data Entry and Formatting</div></div>
+<div class="level left"><div class="circle locked">3</div><div class="label">Basic Formulas</div></div>
+<div class="level right"><div class="circle locked">4</div><div class="label">Basic Maths</div></div>
+<div class="level left"><div class="circle locked">5</div><div class="label">Autofill, Series, Copy Tricks</div></div>
+<div class="level right"><div class="circle locked">6</div><div class="label">Simple Table</div></div>
+<div class="level left"><div class="circle locked">7</div><div class="label">Open, Save, Print, PDF</div></div>
 
-<div class="box">
-<h2 id="done">0</h2>
-<p>DONE</p>
-</div>
+<div class="phase">Phase 2 — Practical Excel</div>
 
-<div class="box">
-<p id="percent">0%</p>
-<p>PROGRESS</p>
-<div class="progress-bar">
-<div class="progress" id="bar"></div>
-</div>
-</div>
+<div class="level right"><div class="circle locked">8</div><div class="label">Salary Sheet</div></div>
+<div class="level left"><div class="circle locked">9</div><div class="label">Attendance Sheet</div></div>
+<div class="level right"><div class="circle locked">10</div><div class="label">Marksheet</div></div>
+<div class="level left"><div class="circle locked">11</div><div class="label">Bill/Invoice</div></div>
+<div class="level right"><div class="circle locked">12</div><div class="label">Sort & Filter</div></div>
+<div class="level left"><div class="circle locked">13</div><div class="label">Conditional Formatting</div></div>
+<div class="level right"><div class="circle locked">14</div><div class="label">Data Validation</div></div>
 
-</div>
+<div class="phase">Phase 3 — Formulas</div>
 
+<div class="level left"><div class="circle locked">15</div><div class="label">IF</div></div>
+<div class="level right"><div class="circle locked">16</div><div class="label">VLOOKUP</div></div>
+<div class="level left"><div class="circle locked">17</div><div class="label">HLOOKUP, XLOOKUP</div></div>
+<div class="level right"><div class="circle locked">18</div><div class="label">XLOOKUP</div></div>
+<div class="level left"><div class="circle locked">19</div><div class="label">LEFT RIGHT MID LEN</div></div>
+<div class="level right"><div class="circle locked">20</div><div class="label">COUNTIF SUMIF</div></div>
+<div class="level left"><div class="circle locked">21</div><div class="label">Absolute Reference ($)</div></div>
 
+<div class="phase">Phase 4 — Analysis</div>
 
-<div class="grid">
+<div class="level right"><div class="circle locked">22</div><div class="label">Remove duplicates, Text to Columns</div></div>
+<div class="level left"><div class="circle locked">23</div><div class="label">Pivot Table</div></div>
+<div class="level right"><div class="circle locked">24</div><div class="label">Charts (Bar, Pie, Line)</div></div>
+<div class="level left"><div class="circle locked">25</div><div class="label">Dashboard Style Sheet</div></div>
+<div class="level right"><div class="circle locked">26</div><div class="label">Find & Replace, Go To</div></div>
+<div class="level left"><div class="circle locked">27</div><div class="label">Freeze Panes, Split</div></div>
 
-<!-- ROW 1 -->
+<div class="phase">Phase 5 — Advanced</div>
 
-<div class="row">
-
-<div class="card p1" id="phase1">
-<div class="phase-dot p1"></div>
-<h3>Phase 1 : Excel Basics</h3>
-<label class="topic"><input type="checkbox">Excel Interface (Basic Structure)</label>
-<label class="topic"><input type="checkbox">Data Entry and Formatting</label>
-<label class="topic"><input type="checkbox">Basic Formulas</label>
-<label class="topic"><input type="checkbox">Basic Maths</label>
-<label class="topic"><input type="checkbox">Autofill, Series, Copy Tricks</label>
-<label class="topic"><input type="checkbox">Simple Table</label>
-<label class="topic"><input type="checkbox">Open, Save, Print, PDF</label>
-</div>
-
-<div class="card locked" id="phase2">
-<div class="phase-dot p2"></div>
-<h3>Phase 2 : Practical Excel</h3>
-<label class="topic"><input type="checkbox">Salary Sheet</label>
-<label class="topic"><input type="checkbox">Attendance Sheet</label>
-<label class="topic"><input type="checkbox">Marksheet</label>
-<label class="topic"><input type="checkbox">Bill/Invoice</label>
-<label class="topic"><input type="checkbox">Sort & Filter</label>
-<label class="topic"><input type="checkbox">Conditional Formatting</label>
-<label class="topic"><input type="checkbox">Data Validation</label>
-</div>
-
-<div class="card locked" id="phase3">
-<div class="phase-dot p3"></div>
-<h3>Phase 3 : Formula Mastery</h3>
-<label class="topic"><input type="checkbox">IF</label>
-<label class="topic"><input type="checkbox">VLOOKUP</label>
-<label class="topic"><input type="checkbox">HLOOKUP, XLOOKUP</label>
-<label class="topic"><input type="checkbox">LEFT, RIGHT, MID, LEN</label>
-<label class="topic"><input type="checkbox">COUNTIF, SUMIF</label>
-<label class="topic"><input type="checkbox">CONCAT/TEXTJOIN</label>
-<label class="topic"><input type="checkbox">Absolute Reference ($)</label>
-</div>
+<div class="level left"><div class="circle locked">29</div><div class="label">Named Ranges</div></div>
+<div class="level right"><div class="circle locked">30</div><div class="label">INDEX MATCH</div></div>
+<div class="level left"><div class="circle locked">31</div><div class="label">Nested IF, IFS, SWITCH</div></div>
+<div class="level right"><div class="circle locked">32</div><div class="label">INDIRECT, OFFSET Functions</div></div>
+<div class="level left"><div class="circle locked">33</div><div class="label">Macros, VBA Basics</div></div>
+<div class="level right"><div class="circle locked">34</div><div class="label">Advanced Pivot & Slicers</div></div>
+<div class="level left"><div class="circle locked">35</div><div class="label">Data Modelling Concepts</div></div>
+<div class="level left"><div class="circle locked">35</div><div class="label">Power Query Introduction</div></div>
 
 </div>
-
-
-<!-- ROW 2 -->
-
-<div class="row">
-
-<div class="card locked" id="phase4">
-<div class="phase-dot p4"></div>
-<h3>Phase 4 : Data Analysis</h3>
-<label class="topic"><input type="checkbox">Remove duplicates, Text to Columns</label>
-<label class="topic"><input type="checkbox">Pivot Table</label>
-<label class="topic"><input type="checkbox">Charts (Bar, Pie, Line)</label>
-<label class="topic"><input type="checkbox">Dashboard Style Sheet</label>
-<label class="topic"><input type="checkbox">Find & Replace, Go To</label>
-<label class="topic"><input type="checkbox">Freeze Panes, Split</label>
-</div>
-
-<div class="card locked" id="phase5">
-<div class="phase-dot p5"></div>
-<h3>Phase 5 : Pro Level Excel</h3>
-<label class="topic"><input type="checkbox">Named Ranges</label>
-<label class="topic"><input type="checkbox">INDEX+MATCH Combo</label>
-<label class="topic"><input type="checkbox">Nested IF, IFS, SWITCH</label>
-<label class="topic"><input type="checkbox">INDIRECT, OFFSET Functions</label>
-<label class="topic"><input type="checkbox">Macros, VBA Basics</label>
-<label class="topic"><input type="checkbox">Advanced Pivot & Slicers</label>
-<label class="topic"><input type="checkbox">Data Modelelling Concepts</label>
-<label class="topic"><input type="checkbox">Power Query Introduction</label>
-</div>
-
-</div>
-
-</div>
-
-<div class="footer">
-Progress saves automatically in your browser
-</div>
-
 
 
 <script>
 
-const checks=document.querySelectorAll("input[type='checkbox']");
-const bar=document.getElementById("bar");
-const percent=document.getElementById("percent");
-const done=document.getElementById("done");
+const levels=document.querySelectorAll(".circle");
 
-const total=checks.length;
+/* LOAD */
 
-/* LOAD SAVE */
-
-checks.forEach((c,i)=>{
-let saved=localStorage.getItem("check"+i);
-if(saved==="true") c.checked=true;
+levels.forEach((c,i)=>{
+let saved=localStorage.getItem("topic"+i);
+if(saved==="done") c.classList.add("completed");
 });
-
-update();
-
-/* EVENTS */
-
-checks.forEach((c,i)=>{
-c.addEventListener("change",()=>{
-localStorage.setItem("check"+i,c.checked);
-update();
-});
-});
-
-
-function update(){
-
-let completed=document.querySelectorAll("input:checked").length;
-
-let p=Math.round((completed/total)*100);
-
-bar.style.width=p+"%";
-percent.innerText=p+"%";
-done.innerText=completed;
 
 unlock();
 
-}
+/* CLICK */
 
+levels.forEach((c,i)=>{
+c.addEventListener("click",()=>{
 
-/* UNLOCK PHASES */
+c.classList.add("completed");
+localStorage.setItem("topic"+i,"done");
+
+unlock();
+
+});
+});
 
 function unlock(){
 
-let p1=[...document.querySelectorAll("#phase1 input")].every(i=>i.checked);
-let p2=[...document.querySelectorAll("#phase2 input")].every(i=>i.checked);
-let p3=[...document.querySelectorAll("#phase3 input")].every(i=>i.checked);
-let p4=[...document.querySelectorAll("#phase4 input")].every(i=>i.checked);
+levels.forEach((c,i)=>{
 
-if(p1) document.getElementById("phase2").classList.remove("locked");
-if(p2) document.getElementById("phase3").classList.remove("locked");
-if(p3) document.getElementById("phase4").classList.remove("locked");
-if(p4) document.getElementById("phase5").classList.remove("locked");
+if(i===0) return;
+
+if(levels[i-1].classList.contains("completed")){
+c.classList.remove("locked");
+}
+
+});
 
 }
 
