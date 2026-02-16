@@ -81,15 +81,8 @@ margin-top:10px;
 .progress{
 height:100%;
 width:0%;
-background:linear-gradient(90deg,#4cffb2,#00e0ff,#4cffb2);
-background-size:200% 100%;
-animation:move 3s linear infinite;
+background:linear-gradient(90deg,#4cffb2,#00e0ff);
 transition:.4s;
-}
-
-@keyframes move{
-0%{background-position:0%}
-100%{background-position:200%}
 }
 
 /* GRID */
@@ -114,34 +107,19 @@ flex-wrap:wrap;
 
 .card{
 width:260px;
-background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,255,255,0.12);
-border-radius:20px;
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:16px;
 padding:20px;
 position:relative;
-backdrop-filter:blur(25px);
-box-shadow:0 0 40px rgba(0,0,0,0.5);
-transition:.4s;
-}
-
-.card::before{
-content:"";
-position:absolute;
-inset:0;
-border-radius:20px;
-padding:1px;
-background:linear-gradient(45deg,transparent,#4cffb2,transparent);
--webkit-mask:
-linear-gradient(#000 0 0) content-box,
-linear-gradient(#000 0 0);
--webkit-mask-composite:xor;
-mask-composite:exclude;
-opacity:.3;
+backdrop-filter:blur(12px);
+box-shadow:0 4px 12px rgba(0,0,0,0.25);
+transition:.3s;
 }
 
 .card:hover{
-transform:translateY(-8px) scale(1.02);
-box-shadow:0 0 40px rgba(0,255,200,0.2);
+transform:translateY(-4px);
+box-shadow:0 6px 16px rgba(0,0,0,0.35);
 }
 
 .locked{
@@ -153,12 +131,12 @@ pointer-events:none;
 /* PHASE DOT */
 
 .phase-dot{
-width:14px;
-height:14px;
+width:12px;
+height:12px;
 border-radius:50%;
 margin-bottom:10px;
-box-shadow:0 0 12px currentColor;
 }
+
 
 .p1{background:#4cffb2}
 .p2{background:#ffd84c}
