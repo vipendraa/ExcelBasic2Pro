@@ -325,12 +325,6 @@ font-size:13px;
 
 </div>
 
-
-<div class="actions">
-<button class="certificate" onclick="downloadCertificate()">Download Certificate</button>
-<button class="reset" onclick="resetProgress()">Reset Progress</button>
-</div>
-
 <div class="footer">
 Progress saves automatically in your browser
 </div>
@@ -393,57 +387,6 @@ if(p1) document.getElementById("phase2").classList.remove("locked");
 if(p2) document.getElementById("phase3").classList.remove("locked");
 if(p3) document.getElementById("phase4").classList.remove("locked");
 if(p4) document.getElementById("phase5").classList.remove("locked");
-
-}
-
-
-/* RESET */
-
-function resetProgress(){
-if(confirm("Reset all progress?")){
-localStorage.clear();
-location.reload();
-}
-}
-
-
-/* CERTIFICATE */
-
-function downloadCertificate(){
-
-let completed=document.querySelectorAll("input:checked").length;
-
-if(completed<total){
-alert("Complete course to unlock certificate");
-return;
-}
-
-let name=prompt("Enter your name");
-
-let canvas=document.createElement("canvas");
-canvas.width=1000;
-canvas.height=700;
-
-let ctx=canvas.getContext("2d");
-
-ctx.fillStyle="#0f2a44";
-ctx.fillRect(0,0,1000,700);
-
-ctx.fillStyle="#4cffb2";
-ctx.font="40px Poppins";
-ctx.fillText("Certificate of Completion",250,150);
-
-ctx.fillStyle="white";
-ctx.font="30px Poppins";
-ctx.fillText(name,420,300);
-
-ctx.font="20px Poppins";
-ctx.fillText("Microsoft Excel Basic to Pro",330,380);
-
-let link=document.createElement("a");
-link.download="certificate.png";
-link.href=canvas.toDataURL();
-link.click();
 
 }
 
