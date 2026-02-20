@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Basic2Pro Login</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:linear-gradient(135deg,#0b1724,#07111b);
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.container{
+background:#111c2a;
+padding:35px;
+border-radius:12px;
+width:340px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+h2{
+margin-bottom:20px;
+color:#4cffb2;
+}
+
+input{
+width:100%;
+padding:12px;
+margin:8px 0;
+border-radius:8px;
+border:none;
+outline:none;
+background:#1c2a3a;
+color:white;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:8px;
+background:#4cffb2;
+color:black;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+opacity:.9;
+}
+
+.switch{
+margin-top:15px;
+font-size:13px;
+cursor:pointer;
+color:#00e0ff;
+}
+
+.message{
+margin-top:12px;
+font-size:13px;
+color:#4cffb2;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2 id="title">Login</h2>
+
+<input type="email" id="email" placeholder="Email">
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="handleAuth()" id="actionBtn">Login</button>
+
+<div class="switch" onclick="toggleMode()">
+Create new account
+</div>
+
+<div class="message" id="msg"></div>
+
+</div>
+
+<script>
+
+/* 🔴 PASTE YOUR SUPABASE DETAILS HERE */
+
+const SUPABASE_URL = "https://rhkduiebjditlwdzuhaa.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJoa2R1aWViamRpdGx3ZHp1aGFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1NjMxODksImV4cCI6MjA4NzEzOTE4OX0.-_jjb7BGY8b872oU4OMpcuJcyZPz4KOlF1JTPZH2W48";
+
+const supabase = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+let isLogin = true;
+
+/* AUTO REDIRECT IF ALREADY LOGGED */
+
+checkSession();
+
+async function checkSession(){
+
+const { data } = await supabase.auth.getSession();
+
+if(data.session){
+window.location = "roadmap.html";
+}
+
+}
+
+/* TOGGLE LOGIN / SIGNUP */
+
+function toggleMode(){
+
+isLogin = !isLogin;
+
+document.getElementById("title").innerText =
+isLogin ? "Login" : "Create Account";
+
+document.getElementById("actionBtn").innerText =
+isLogin ? "Login" : "Sign Up";
+
+document.querySelector(".switch").innerText =
+isLogin ? "Create new account" : "Already have account? Login";
+
+document.getElementById("msg").innerText = "";
+
+}
+
+/* AUTH FUNCTION */
+
+async function handleAuth(){
+
+let email = document.getElementById("email").value;
+let password = document.getElementById("password").value;
+
+if(!email || !password){
+alert("Enter email and password");
+return;
+}
+
+if(isLogin){
+
+const { error } = await supabase.auth.signInWithPassword({
+email,
+password
+});
+
+if(error){
+alert(error.message);
+return;
+}
+
+window.location = "roadmap.html";
+
+}else{
+
+const { error } = await supabase.auth.signUp({
+email,
+password
+});
+
+if(error){
+alert(error.message);
+return;
+}
+
+document.getElementById("msg").innerText =
+"Verification email sent. Please check inbox.";
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
