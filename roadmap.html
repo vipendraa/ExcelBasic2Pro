@@ -459,7 +459,10 @@ levels[0].classList.remove("locked");
 updateProgress();
 
 }
-
+function logout(){
+localStorage.removeItem("googleUserToken");
+window.location = "index.html";
+}
 }
 
   if(userPlan === "pro"){
