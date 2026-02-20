@@ -6,15 +6,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Basic2Pro Login</title>
 
-<!-- Supabase Library -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 body{
 margin:0;
-font-family:Arial, sans-serif;
-background:linear-gradient(135deg,#0b1724,#07111b);
+font-family:Arial;
+background:#0b1724;
 color:white;
 display:flex;
 justify-content:center;
@@ -22,156 +20,74 @@ align-items:center;
 height:100vh;
 }
 
-.container{
+.box{
 background:#111c2a;
-padding:35px;
-border-radius:12px;
-width:340px;
+padding:30px;
+border-radius:10px;
+width:320px;
 text-align:center;
-box-shadow:0 10px 30px rgba(0,0,0,.4);
-}
-
-h2{
-margin-bottom:20px;
-color:#4cffb2;
 }
 
 input{
 width:100%;
-padding:12px;
+padding:10px;
 margin:8px 0;
-border-radius:8px;
+border-radius:6px;
 border:none;
-outline:none;
-background:#1c2a3a;
-color:white;
 }
 
 button{
 width:100%;
-padding:12px;
+padding:10px;
 margin-top:10px;
 border:none;
-border-radius:8px;
+border-radius:6px;
 background:#4cffb2;
-color:black;
+cursor:pointer;
 font-weight:bold;
-cursor:pointer;
 }
 
-button:hover{
-opacity:.9;
-}
-
-.switch{
-margin-top:15px;
-font-size:13px;
-cursor:pointer;
-color:#00e0ff;
-}
-
-.message{
-margin-top:12px;
-font-size:13px;
-color:#4cffb2;
-}
 </style>
 
 </head>
 
 <body>
 
-<div class="container">
+<div class="box">
 
-<h2 id="title">Login</h2>
+<h2>Basic2Pro Login</h2>
 
 <input type="email" id="email" placeholder="Email">
 <input type="password" id="password" placeholder="Password">
 
-<button onclick="handleAuth()" id="actionBtn">Login</button>
-
-<div class="switch" onclick="toggleMode()">
-Create new account
-</div>
-
-<div class="message" id="msg"></div>
+<button onclick="signup()">Create Account</button> <button onclick="login()">Login</button>
 
 </div>
 
 <script>
 
-/* ================================
-   🔴 STEP 1: PASTE YOUR DETAILS
-================================ */
+/* 🔴 PUT YOUR REAL DETAILS HERE */
 
 const SUPABASE_URL = https://rhkduiebjditlwdzuhaa.supabase.co;
 const SUPABASE_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJoa2R1aWViamRpdGx3ZHp1aGFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1NjMxODksImV4cCI6MjA4NzEzOTE4OX0.-_jjb7BGY8b872oU4OMpcuJcyZPz4KOlF1JTPZH2W48;
 
-/* ================================
-   SUPABASE INIT
-================================ */
+/* INIT */
 
 const client = supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
 
-/* ================================
-   AUTO LOGIN CHECK
-================================ */
+/* SIGNUP */
 
-checkSession();
+async function signup(){
 
-async function checkSession(){
+alert("Signup clicked");
 
-const { data } = await client.auth.getSession();
+let email=document.getElementById("email").value;
+let password=document.getElementById("password").value;
 
-if(data.session){
-window.location = "roadmap.html";
-}
-
-}
-
-/* ================================
-   LOGIN / SIGNUP MODE
-================================ */
-
-let isLogin = true;
-
-function toggleMode(){
-
-isLogin = !isLogin;
-
-document.getElementById("title").innerText =
-isLogin ? "Login" : "Create Account";
-
-document.getElementById("actionBtn").innerText =
-isLogin ? "Login" : "Sign Up";
-
-document.querySelector(".switch").innerText =
-isLogin ? "Create new account" : "Already have account? Login";
-
-document.getElementById("msg").innerText = "";
-
-}
-
-/* ================================
-   AUTH FUNCTION
-================================ */
-
-async function handleAuth(){
-
-let email = document.getElementById("email").value;
-let password = document.getElementById("password").value;
-
-if(!email || !password){
-alert("Enter email and password");
-return;
-}
-
-if(isLogin){
-
-const { error } = await client.auth.signInWithPassword({
+const { data, error } = await client.auth.signUp({
 email,
 password
 });
@@ -181,11 +97,20 @@ alert(error.message);
 return;
 }
 
-window.location = "roadmap.html";
+alert("Signup success. Check email.");
 
-}else{
+}
 
-const { error } = await client.auth.signUp({
+/* LOGIN */
+
+async function login(){
+
+alert("Login clicked");
+
+let email=document.getElementById("email").value;
+let password=document.getElementById("password").value;
+
+const { data, error } = await client.auth.signInWithPassword({
 email,
 password
 });
@@ -195,10 +120,9 @@ alert(error.message);
 return;
 }
 
-document.getElementById("msg").innerText =
-"Verification email sent. Check your inbox.";
+alert("Login success");
 
-}
+window.location="roadmap.html";
 
 }
 
