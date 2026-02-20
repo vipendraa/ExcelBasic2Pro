@@ -1,20 +1,132 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
 <head>
-<title>Test</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Basic2Pro Login</title>
+
+<!-- ✅ Stable Supabase Version -->
+
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#0b1724;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.box{
+background:#111c2a;
+padding:30px;
+border-radius:10px;
+width:320px;
+text-align:center;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:8px 0;
+border-radius:6px;
+border:none;
+}
+
+button{
+width:100%;
+padding:10px;
+margin-top:10px;
+border:none;
+border-radius:6px;
+background:#4cffb2;
+cursor:pointer;
+font-weight:bold;
+}
+</style>
+
 </head>
 
 <body>
 
-<h1>Test Page</h1>
+<div class="box">
 
-<button onclick="test()">Click Me</button>
+<h2>Basic2Pro Login</h2>
+
+<input type="email" id="email" placeholder="Email">
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="signup()">Create Account</button> <button onclick="login()">Login</button>
+
+</div>
 
 <script>
-function test(){
-alert("Button working");
+
+/* 🔴 PUT YOUR REAL SUPABASE DETAILS */
+
+const SUPABASE_URL = https://rhkduiebjditlwdzuhaa.supabase.co;
+const SUPABASE_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJoa2R1aWViamRpdGx3ZHp1aGFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1NjMxODksImV4cCI6MjA4NzEzOTE4OX0.-_jjb7BGY8b872oU4OMpcuJcyZPz4KOlF1JTPZH2W48;
+
+/* INIT */
+
+const client = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+/* SIGNUP */
+
+async function signup(){
+
+alert("Signup clicked");
+
+let email=document.getElementById("email").value;
+let password=document.getElementById("password").value;
+
+const { error } = await client.auth.signUp({
+email,
+password
+});
+
+if(error){
+alert(error.message);
+return;
 }
+
+alert("Signup success. Check email.");
+
+}
+
+/* LOGIN */
+
+async function login(){
+
+alert("Login clicked");
+
+let email=document.getElementById("email").value;
+let password=document.getElementById("password").value;
+
+const { error } = await client.auth.signInWithPassword({
+email,
+password
+});
+
+if(error){
+alert(error.message);
+return;
+}
+
+alert("Login success");
+
+window.location="roadmap.html";
+
+}
+
 </script>
 
 </body>
