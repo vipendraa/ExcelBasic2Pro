@@ -36,7 +36,9 @@ document.getElementById("userPic").src =
 userData.picture;
 
 }
-
+function goPro(){
+window.location="pricing.html";
+}
 </script>
 
 <html lang="en">
@@ -58,7 +60,21 @@ padding:12px 20px;
 background:#0f1c2b;
 border-bottom:1px solid rgba(255,255,255,0.08);
 }
+.upgrade-btn{
+padding:6px 14px;
+border:none;
+border-radius:8px;
+background:linear-gradient(90deg,#ffd700,#ffb700);
+color:black;
+cursor:pointer;
+font-size:13px;
+font-weight:bold;
+transition:.3s;
+}
 
+.upgrade-btn:hover{
+transform:scale(1.05);
+}
 .brand{
 color:#4cffb2;
 font-weight:bold;
@@ -273,6 +289,7 @@ border-radius:6px;
         <img id="userPic" class="avatar">
 
         <span id="userName"></span>
+      <button class="upgrade-btn" onclick="goPro()">Upgrade</button>
 
         <button class="logout-btn" onclick="logout()">Logout</button>
 
