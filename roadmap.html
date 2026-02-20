@@ -39,6 +39,8 @@ userData.picture;
 function goPro(){
 window.location="pricing.html";
 }
+  let planKey = "plan_" + userData.email;
+let userPlan = localStorage.getItem(planKey) || "free";
 </script>
 
 <html lang="en">
@@ -402,6 +404,12 @@ function unlock(){
 
 levels.forEach((c,i)=>{
 
+/* Phase 5 lock for free users */
+if(userPlan !== "pro" && i >= 28){
+c.classList.add("locked");
+return;
+}
+
 if(i===0) return;
 
 if(levels[i-1].classList.contains("completed")){
@@ -412,6 +420,9 @@ c.classList.remove("locked");
 
 }
 
+  if(userPlan === "pro"){
+document.querySelector(".upgrade-btn").style.display="none";
+  }
   function updateProgress(){
 
 let completed=document.querySelectorAll(".circle.completed").length;
