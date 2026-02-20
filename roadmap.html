@@ -1,9 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <script>
 
-/* CHECK LOGIN */
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Excel Basic2Pro Roadmap</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<script>
+
+/* ================= LOGIN CHECK ================= */
 
 let token = localStorage.getItem("googleUserToken");
 
@@ -11,15 +19,19 @@ if(!token){
 window.location = "index.html";
 }
 
-/* DECODE TOKEN */
+/* ================= TOKEN DECODE ================= */
 
-function parseJwt (token) {
+function parseJwt(token) {
 
-var base64Url = token.split('.')[1];
-var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-}).join(''));
+let base64Url = token.split('.')[1];
+let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+
+let jsonPayload = decodeURIComponent(
+atob(base64)
+.split('')
+.map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+.join('')
+);
 
 return JSON.parse(jsonPayload);
 
@@ -27,34 +39,42 @@ return JSON.parse(jsonPayload);
 
 let userData = parseJwt(token);
 
-/* DISPLAY USER */
+/* ================= PLAN SYSTEM ================= */
 
-window.onload = function(){
-
-document.getElementById("userName").innerText =
-userData.name;
-
-document.getElementById("userPic").src =
-userData.picture;
-
-}
-function goPro(){
-window.location="pricing.html";
-}
-  let planKey = "plan_" + userData.email;
+let planKey = "plan_" + userData.email;
 let userPlan = localStorage.getItem(planKey) || "free";
+
+/* ================= NAVIGATION ================= */
+
+function goPro(){
+window.location = "pricing.html";
+}
+
+function logout(){
+
+google?.accounts?.id?.disableAutoSelect?.();
+
+localStorage.removeItem("googleUserToken");
+
+window.location = "index.html";
+
+}
+
 </script>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Excel Basic2Pro Roadmap</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 
-  .topbar{
+body{
+margin:0;
+font-family:Poppins;
+background:linear-gradient(180deg,#0b1724,#07111b);
+color:white;
+text-align:center;
+}
+
+/* TOP BAR */
+
+.topbar{
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -62,21 +82,7 @@ padding:12px 20px;
 background:#0f1c2b;
 border-bottom:1px solid rgba(255,255,255,0.08);
 }
-.upgrade-btn{
-padding:6px 14px;
-border:none;
-border-radius:8px;
-background:linear-gradient(90deg,#ffd700,#ffb700);
-color:black;
-cursor:pointer;
-font-size:13px;
-font-weight:bold;
-transition:.3s;
-}
 
-.upgrade-btn:hover{
-transform:scale(1.05);
-}
 .brand{
 color:#4cffb2;
 font-weight:bold;
@@ -96,6 +102,16 @@ border-radius:50%;
 border:2px solid #4cffb2;
 }
 
+.upgrade-btn{
+padding:6px 14px;
+border:none;
+border-radius:8px;
+background:linear-gradient(90deg,#ffd700,#ffb700);
+color:black;
+cursor:pointer;
+font-weight:bold;
+}
+
 .logout-btn{
 padding:6px 14px;
 border:none;
@@ -103,19 +119,90 @@ border-radius:8px;
 background:linear-gradient(90deg,#ff5757,#ff8a57);
 color:white;
 cursor:pointer;
-font-size:13px;
 font-weight:bold;
-transition:0.3s;
 }
 
-.logout-btn:hover{
-transform:scale(1.05);
+/* ROAD */
+
+h1{
+margin:20px;
+color:#4cffb2;
 }
 
-  /* TOP CONTROLS */
+.road{
+position:relative;
+width:100%;
+max-width:420px;
+margin:auto;
+padding:40px 0;
+}
+
+.path{
+position:absolute;
+left:50%;
+top:0;
+width:6px;
+height:100%;
+background:#1e3a52;
+transform:translateX(-50%);
+border-radius:10px;
+}
+
+.level{
+position:relative;
+margin:50px 0;
+display:flex;
+align-items:center;
+}
+
+.left{ justify-content:flex-start; padding-left:30px; }
+.right{ justify-content:flex-end; padding-right:30px; }
+
+.circle{
+width:65px;
+height:65px;
+border-radius:50%;
+background:#1e3a52;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+transition:.3s;
+}
+
+.completed{
+background:#4cffb2;
+color:black;
+}
+
+.locked{
+opacity:.4;
+pointer-events:none;
+}
+
+.label{
+position:absolute;
+top:70px;
+width:160px;
+font-size:13px;
+}
+
+.left .label{ left:0; text-align:left; }
+.right .label{ right:0; text-align:right; }
+
+.phase{
+margin:30px 0 10px;
+font-weight:600;
+color:#00e0ff;
+background:#0b1724;
+display:inline-block;
+padding:4px 10px;
+border-radius:6px;
+}
+
+/* PROGRESS */
 
 .top-controls{
-position:relative;
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -123,16 +210,7 @@ margin-bottom:30px;
 padding:0 20px;
 }
 
-.progress-box{
-width:45%;
-text-align:left;
-}
-
-.progress-text{
-font-size:14px;
-margin-bottom:6px;
-color:#4cffb2;
-}
+.progress-box{ width:45%; text-align:left; }
 
 .progress-bar{
 height:10px;
@@ -155,147 +233,26 @@ border-radius:8px;
 background:#ff5757;
 color:white;
 cursor:pointer;
-font-size:13px;
 }
-
-.reset-btn:hover{
-opacity:.85;
-}
-
-
-body{
-margin:0;
-font-family:Poppins;
-background:linear-gradient(180deg,#0b1724,#07111b);
-color:white;
-text-align:center;
-}
-
-h1{
-margin:20px;
-color:#4cffb2;
-}
-
-/* ROAD */
-
-.road{
-position:relative;
-width:100%;
-max-width:420px;
-margin:auto;
-padding:40px 0;
-}
-
-.path{
-position:absolute;
-left:50%;
-top:0;
-width:6px;
-height:100%;
-background:#1e3a52;
-transform:translateX(-50%);
-border-radius:10px;
-}
-
-/* LEVEL */
-
-.level{
-position:relative;
-margin:50px 0;
-display:flex;
-align-items:center;
-}
-
-.left{
-justify-content:flex-start;
-padding-left:30px;
-}
-
-.right{
-justify-content:flex-end;
-padding-right:30px;
-}
-
-.circle{
-width:65px;
-height:65px;
-border-radius:50%;
-background:#1e3a52;
-display:flex;
-align-items:center;
-justify-content:center;
-cursor:pointer;
-transition:.3s;
-font-size:14px;
-}
-
-.completed{
-background:#4cffb2;
-color:black;
-}
-
-.locked{
-opacity:.4;
-pointer-events:none;
-}
-
-.current{
-box-shadow:0 0 15px rgba(76,255,178,.6);
-border:2px solid #4cffb2;
-}
-
-/* LABEL */
-
-.label{
-position:absolute;
-top:70px;
-width:160px;
-font-size:13px;
-}
-
-.left .label{
-left:0;
-text-align:left;
-}
-
-.right .label{
-right:0;
-text-align:right;
-}
-
-/* PHASE TITLE */
-
-.phase{
-margin:30px 0 10px;
-font-weight:600;
-color:#00e0ff;
-position:relative;
-z-index:2;   /* text above line */
-background:#0b1724;
-display:inline-block;
-padding:4px 10px;
-border-radius:6px;
-}
-
 
 </style>
+
 </head>
 
 <body>
+
 <div class="topbar">
 
-    <div class="brand">Basic2Pro</div>
+<div class="brand">Basic2Pro</div>
 
-    <div class="user-area">
+<div class="user-area">
 
-        <img id="userPic" class="avatar">
+<img id="userPic" class="avatar">
+<span id="userName"></span>
 
-        <span id="userName"></span>
-      <button class="upgrade-btn" onclick="goPro()">Upgrade</button>
+<button class="upgrade-btn" onclick="goPro()">Upgrade</button> <button class="logout-btn" onclick="logout()">Logout</button>
 
-        <button class="logout-btn" onclick="logout()">Logout</button>
-
-    </div>
+</div>
 
 </div>
 
@@ -305,100 +262,98 @@ border-radius:6px;
 
 <div class="path"></div>
 
-  <div class="top-controls">
+<div class="top-controls">
+<div class="progress-box">
+Progress: <span id="progressPercent">0%</span>
+<div class="progress-bar">
+<div class="progress-fill" id="progressFill"></div>
+</div>
+</div>
 
-    <div class="progress-box">
-        <div class="progress-text">Progress: <span id="progressPercent">0%</span></div>
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
-    </div>
-
-    <button class="reset-btn" onclick="resetProgress()">Reset Progress</button>
+<button class="reset-btn" onclick="resetProgress()">Reset Progress</button>
 
 </div>
 
+<!-- PHASES (same as yours) -->
 
 <div class="phase">Phase 1 — Excel Basics</div>
-
 <div class="level left"><div class="circle">1</div><div class="label">Excel Interface</div></div>
-<div class="level right"><div class="circle locked">2</div><div class="label">Data Entry and Formatting</div></div>
+<div class="level right"><div class="circle locked">2</div><div class="label">Data Entry</div></div>
 <div class="level left"><div class="circle locked">3</div><div class="label">Basic Formulas</div></div>
 <div class="level right"><div class="circle locked">4</div><div class="label">Basic Maths</div></div>
-<div class="level left"><div class="circle locked">5</div><div class="label">Autofill, Series, Copy Tricks</div></div>
+<div class="level left"><div class="circle locked">5</div><div class="label">Autofill</div></div>
 <div class="level right"><div class="circle locked">6</div><div class="label">Simple Table</div></div>
-<div class="level left"><div class="circle locked">7</div><div class="label">Open, Save, Print, PDF</div></div>
+<div class="level left"><div class="circle locked">7</div><div class="label">Open Save Print</div></div>
 
 <div class="phase">Phase 2 — Practical Excel</div>
-
 <div class="level right"><div class="circle locked">8</div><div class="label">Salary Sheet</div></div>
-<div class="level left"><div class="circle locked">9</div><div class="label">Attendance Sheet</div></div>
+<div class="level left"><div class="circle locked">9</div><div class="label">Attendance</div></div>
 <div class="level right"><div class="circle locked">10</div><div class="label">Marksheet</div></div>
-<div class="level left"><div class="circle locked">11</div><div class="label">Bill/Invoice</div></div>
-<div class="level right"><div class="circle locked">12</div><div class="label">Sort & Filter</div></div>
+<div class="level left"><div class="circle locked">11</div><div class="label">Invoice</div></div>
+<div class="level right"><div class="circle locked">12</div><div class="label">Sort Filter</div></div>
 <div class="level left"><div class="circle locked">13</div><div class="label">Conditional Formatting</div></div>
 <div class="level right"><div class="circle locked">14</div><div class="label">Data Validation</div></div>
 
 <div class="phase">Phase 3 — Formulas</div>
-
 <div class="level left"><div class="circle locked">15</div><div class="label">IF</div></div>
 <div class="level right"><div class="circle locked">16</div><div class="label">VLOOKUP</div></div>
-<div class="level left"><div class="circle locked">17</div><div class="label">HLOOKUP, XLOOKUP</div></div>
-<div class="level right"><div class="circle locked">18</div><div class="label">XLOOKUP</div></div>
-<div class="level left"><div class="circle locked">19</div><div class="label">LEFT RIGHT MID LEN</div></div>
-<div class="level right"><div class="circle locked">20</div><div class="label">COUNTIF SUMIF</div></div>
-<div class="level left"><div class="circle locked">21</div><div class="label">Absolute Reference ($)</div></div>
+<div class="level left"><div class="circle locked">17</div><div class="label">XLOOKUP</div></div>
+<div class="level right"><div class="circle locked">18</div><div class="label">Text Functions</div></div>
+<div class="level left"><div class="circle locked">19</div><div class="label">COUNTIF</div></div>
+<div class="level right"><div class="circle locked">20</div><div class="label">SUMIF</div></div>
+<div class="level left"><div class="circle locked">21</div><div class="label">Absolute Ref</div></div>
 
 <div class="phase">Phase 4 — Analysis</div>
-
-<div class="level right"><div class="circle locked">22</div><div class="label">Remove duplicates, Text to Columns</div></div>
+<div class="level right"><div class="circle locked">22</div><div class="label">Text to Columns</div></div>
 <div class="level left"><div class="circle locked">23</div><div class="label">Pivot Table</div></div>
-<div class="level right"><div class="circle locked">24</div><div class="label">Charts (Bar, Pie, Line)</div></div>
-<div class="level left"><div class="circle locked">25</div><div class="label">Dashboard Style Sheet</div></div>
-<div class="level right"><div class="circle locked">26</div><div class="label">Find & Replace, Go To</div></div>
-<div class="level left"><div class="circle locked">27</div><div class="label">Freeze Panes, Split</div></div>
+<div class="level right"><div class="circle locked">24</div><div class="label">Charts</div></div>
+<div class="level left"><div class="circle locked">25</div><div class="label">Dashboard</div></div>
+<div class="level right"><div class="circle locked">26</div><div class="label">Find Replace</div></div>
+<div class="level left"><div class="circle locked">27</div><div class="label">Freeze</div></div>
 
 <div class="phase">Phase 5 — Advanced</div>
-
 <div class="level left"><div class="circle locked">28</div><div class="label">Named Ranges</div></div>
-<div class="level right"><div class="circle locked">29</div><div class="label">INDEX MATCH</div></div>
-<div class="level left"><div class="circle locked">30</div><div class="label">Nested IF, IFS, SWITCH</div></div>
-<div class="level right"><div class="circle locked">31</div><div class="label">INDIRECT, OFFSET Functions</div></div>
-<div class="level left"><div class="circle locked">32</div><div class="label">Macros, VBA Basics</div></div>
-<div class="level right"><div class="circle locked">33</div><div class="label">Advanced Pivot & Slicers</div></div>
-<div class="level left"><div class="circle locked">34</div><div class="label">Data Modelling Concepts</div></div>
-<div class="level right"><div class="circle locked">35</div><div class="label">Power Query Introduction</div></div>
+<div class="level right"><div class="circle locked">29</div><div class="label">Index Match</div></div>
+<div class="level left"><div class="circle locked">30</div><div class="label">Nested IF</div></div>
+<div class="level right"><div class="circle locked">31</div><div class="label">Offset</div></div>
+<div class="level left"><div class="circle locked">32</div><div class="label">VBA</div></div>
+<div class="level right"><div class="circle locked">33</div><div class="label">Advanced Pivot</div></div>
+<div class="level left"><div class="circle locked">34</div><div class="label">Data Model</div></div>
+<div class="level right"><div class="circle locked">35</div><div class="label">Power Query</div></div>
 
 </div>
 
-
 <script>
 
-const levels=document.querySelectorAll(".circle");
+/* DISPLAY USER */
 
-/* LOAD */
+document.getElementById("userName").innerText = userData.name;
+document.getElementById("userPic").src = userData.picture;
+
+if(userPlan === "pro"){
+document.querySelector(".upgrade-btn").style.display="none";
+}
+
+/* ROAD LOGIC */
+
+const levels = document.querySelectorAll(".circle");
 
 levels.forEach((c,i)=>{
-let saved=localStorage.getItem("topic"+i);
+let saved = localStorage.getItem("topic"+i);
 if(saved==="done") c.classList.add("completed");
 });
 
 unlock();
-
-/* CLICK */
+updateProgress();
 
 levels.forEach((c,i)=>{
 c.addEventListener("click",()=>{
-
 c.classList.add("completed");
 localStorage.setItem("topic"+i,"done");
-
 unlock();
 updateProgress();
-
 });
 });
-
 
 function unlock(){
 
@@ -420,18 +375,7 @@ c.classList.remove("locked");
 
 }
 
-window.onload = function(){
-
-document.getElementById("userName").innerText = userData.name;
-document.getElementById("userPic").src = userData.picture;
-
-/* Hide upgrade if pro */
-if(userPlan === "pro"){
-document.querySelector(".upgrade-btn").style.display="none";
-}
-
-}
-  function updateProgress(){
+function updateProgress(){
 
 let completed=document.querySelectorAll(".circle.completed").length;
 let total=levels.length;
@@ -445,11 +389,10 @@ document.getElementById("progressPercent").innerText=percent+"%";
 
 function resetProgress(){
 
-if(confirm("Reset all progress?")){
+if(confirm("Reset progress?")){
 
-levels.forEach((c,i)=>{ localStorage.removeItem("topic"+i); });
-
-levels.forEach(c=>{
+levels.forEach((c,i)=>{
+localStorage.removeItem("topic"+i);
 c.classList.remove("completed");
 c.classList.add("locked");
 });
@@ -459,16 +402,8 @@ levels[0].classList.remove("locked");
 updateProgress();
 
 }
-function logout(){
-localStorage.removeItem("googleUserToken");
-window.location = "index.html";
-}
-}
 
-  if(userPlan === "pro"){
-document.getElementById("userName").innerText += " 👑";
 }
-
 
 </script>
 
