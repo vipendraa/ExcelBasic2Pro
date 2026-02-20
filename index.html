@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Basic2Pro Login</title>
 
-<!-- ✅ Stable Supabase Version -->
+<!-- Google Identity Script -->
 
-<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 
 <style>
 body{
 margin:0;
-font-family:Arial;
-background:#0b1724;
+font-family:Arial, sans-serif;
+background:linear-gradient(135deg,#0b1724,#07111b);
 color:white;
 display:flex;
 justify-content:center;
@@ -22,120 +22,61 @@ align-items:center;
 height:100vh;
 }
 
-.box{
+.container{
 background:#111c2a;
-padding:30px;
-border-radius:10px;
-width:320px;
+padding:40px;
+border-radius:12px;
 text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,.4);
 }
 
-input{
-width:100%;
-padding:10px;
-margin:8px 0;
-border-radius:6px;
-border:none;
+h2{
+color:#4cffb2;
+margin-bottom:20px;
 }
 
-button{
-width:100%;
-padding:10px;
-margin-top:10px;
-border:none;
-border-radius:6px;
-background:#4cffb2;
-cursor:pointer;
-font-weight:bold;
+p{
+font-size:14px;
+opacity:.8;
+margin-bottom:20px;
 }
+
 </style>
 
 </head>
 
 <body>
 
-<div class="box">
+<div class="container">
 
-<h2>Basic2Pro Login</h2>
+<h2>Welcome to Basic2Pro</h2>
+<p>Sign in to continue</p>
 
-<input type="email" id="email" placeholder="Email">
-<input type="password" id="password" placeholder="Password">
+<div id="g_id_onload"
+data-client_id="724957971033-5ie7iqli2srsahtq29vk6bu16k52r9cp.apps.googleusercontent.com"
+data-callback="handleCredentialResponse">
+</div>
 
-<button onclick="signup()">Create Account</button> <button onclick="login()">Login</button>
+<div class="g_id_signin"
+data-type="standard"
+data-size="large"
+data-theme="outline"
+data-text="sign_in_with"
+data-shape="rectangular"
+data-logo_alignment="left">
+</div>
 
 </div>
 
 <script>
 
-/* 🔴 PUT YOUR REAL SUPABASE DETAILS */
+function handleCredentialResponse(response){
 
-const SUPABASE_URL = https://rhkduiebjditlwdzuhaa.supabase.co;
-const SUPABASE_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJoa2R1aWViamRpdGx3ZHp1aGFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1NjMxODksImV4cCI6MjA4NzEzOTE4OX0.-_jjb7BGY8b872oU4OMpcuJcyZPz4KOlF1JTPZH2W48;
+/* Save user token locally */
+localStorage.setItem("googleUserToken", response.credential);
 
-  <button onclick="testConnection()">Test Supabase</button>
-  async function testConnection(){
-
-const { data, error } = await client.auth.getSession();
-
-if(error){
-alert("Error: " + error.message);
-}else{
-alert("Supabase connected successfully");
-}
-
-}
-/* INIT */
-
-const client = supabase.createClient(
-  https://rhkduiebjditlwdzuhaa.supabase.co,
-  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJoa2R1aWViamRpdGx3ZHp1aGFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1NjMxODksImV4cCI6MjA4NzEzOTE4OX0.-_jjb7BGY8b872oU4OMpcuJcyZPz4KOlF1JTPZH2W48
-);
-
-/* SIGNUP */
-
-async function signup(){
-
-alert("Signup clicked");
-
-let email=document.getElementById("email").value;
-let password=document.getElementById("password").value;
-
-const { error } = await client.auth.signUp({
-email,
-password
-});
-
-if(error){
-alert(error.message);
-return;
-}
-
-alert("Signup success. Check email.");
-
-}
-
-/* LOGIN */
-
-async function login(){
-
-alert("Login clicked");
-
-let email=document.getElementById("email").value;
-let password=document.getElementById("password").value;
-
-const { error } = await client.auth.signInWithPassword({
-email,
-password
-});
-
-if(error){
-alert(error.message);
-return;
-}
-
-alert("Login success");
-
-window.location="roadmap.html";
+/* Redirect to roadmap page */
+window.location.href = "roadmap.html";
 
 }
 
