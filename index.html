@@ -72,6 +72,18 @@ font-weight:bold;
 const SUPABASE_URL = https://rhkduiebjditlwdzuhaa.supabase.co;
 const SUPABASE_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJoa2R1aWViamRpdGx3ZHp1aGFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1NjMxODksImV4cCI6MjA4NzEzOTE4OX0.-_jjb7BGY8b872oU4OMpcuJcyZPz4KOlF1JTPZH2W48;
 
+  <button onclick="testConnection()">Test Supabase</button>
+  async function testConnection(){
+
+const { data, error } = await client.auth.getSession();
+
+if(error){
+alert("Error: " + error.message);
+}else{
+alert("Supabase connected successfully");
+}
+
+}
 /* INIT */
 
 const client = supabase.createClient(
