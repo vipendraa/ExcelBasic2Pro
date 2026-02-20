@@ -44,6 +44,14 @@ margin-bottom:20px;
 </style>
 
 </head>
+  <button onclick="logout()">Logout</button>
+
+<script>
+function logout(){
+localStorage.removeItem("googleUserToken");
+window.location="index.html";
+}
+</script>
 
 <body>
 
