@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<script>
+<html lang="en">
+<head>
+  <script>
 
 /* CHECK LOGIN */
 
@@ -43,8 +45,6 @@ window.location="pricing.html";
 let userPlan = localStorage.getItem(planKey) || "free";
 </script>
 
-<html lang="en">
-<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -405,7 +405,7 @@ function unlock(){
 levels.forEach((c,i)=>{
 
 /* Phase 5 lock for free users */
-if(userPlan !== "pro" && i >= 28){
+if(userPlan !== "pro" && i >= 27){
 c.classList.add("locked");
 return;
 }
@@ -420,9 +420,17 @@ c.classList.remove("locked");
 
 }
 
-  if(userPlan === "pro"){
+window.onload = function(){
+
+document.getElementById("userName").innerText = userData.name;
+document.getElementById("userPic").src = userData.picture;
+
+/* Hide upgrade if pro */
+if(userPlan === "pro"){
 document.querySelector(".upgrade-btn").style.display="none";
-  }
+}
+
+}
   function updateProgress(){
 
 let completed=document.querySelectorAll(".circle.completed").length;
@@ -439,7 +447,7 @@ function resetProgress(){
 
 if(confirm("Reset all progress?")){
 
-localStorage.clear();
+levels.forEach((c,i)=>{ localStorage.removeItem("topic"+i); });
 
 levels.forEach(c=>{
 c.classList.remove("completed");
@@ -452,6 +460,10 @@ updateProgress();
 
 }
 
+}
+
+  if(userPlan === "pro"){
+document.getElementById("userName").innerText += " 👑";
 }
 
 
