@@ -6,10 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Basic2Pro Login</title>
 
+<!-- Supabase Library -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-
 body{
 margin:0;
 font-family:Arial, sans-serif;
@@ -74,7 +75,6 @@ margin-top:12px;
 font-size:13px;
 color:#4cffb2;
 }
-
 </style>
 
 </head>
@@ -99,21 +99,32 @@ Create new account
 </div>
 
 <script>
-  
-const SUPABASE_URL = "https://rhkduiebjditlwdzuhaa.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJoa2R1aWViamRpdGx3ZHp1aGFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1NjMxODksImV4cCI6MjA4NzEzOTE4OX0.-_jjb7BGY8b872oU4OMpcuJcyZPz4KOlF1JTPZH2W48";
 
-const client = createClient(https://rhkduiebjditlwdzuhaa.supabase.co, eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJoa2R1aWViamRpdGx3ZHp1aGFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1NjMxODksImV4cCI6MjA4NzEzOTE4OX0.-_jjb7BGY8b872oU4OMpcuJcyZPz4KOlF1JTPZH2W48);
+/* ================================
+   🔴 STEP 1: PASTE YOUR DETAILS
+================================ */
 
-let isLogin = true;
+const SUPABASE_URL = https://rhkduiebjditlwdzuhaa.supabase.co;
+const SUPABASE_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJoa2R1aWViamRpdGx3ZHp1aGFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1NjMxODksImV4cCI6MjA4NzEzOTE4OX0.-_jjb7BGY8b872oU4OMpcuJcyZPz4KOlF1JTPZH2W48;
 
-/* AUTO REDIRECT IF ALREADY LOGGED */
+/* ================================
+   SUPABASE INIT
+================================ */
+
+const client = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+/* ================================
+   AUTO LOGIN CHECK
+================================ */
 
 checkSession();
 
 async function checkSession(){
 
-const { data } = await supabase.auth.getSession();
+const { data } = await client.auth.getSession();
 
 if(data.session){
 window.location = "roadmap.html";
@@ -121,7 +132,11 @@ window.location = "roadmap.html";
 
 }
 
-/* TOGGLE LOGIN / SIGNUP */
+/* ================================
+   LOGIN / SIGNUP MODE
+================================ */
+
+let isLogin = true;
 
 function toggleMode(){
 
@@ -140,7 +155,9 @@ document.getElementById("msg").innerText = "";
 
 }
 
-/* AUTH FUNCTION */
+/* ================================
+   AUTH FUNCTION
+================================ */
 
 async function handleAuth(){
 
@@ -154,7 +171,7 @@ return;
 
 if(isLogin){
 
-const { error } = await supabase.auth.signInWithPassword({
+const { error } = await client.auth.signInWithPassword({
 email,
 password
 });
@@ -168,7 +185,7 @@ window.location = "roadmap.html";
 
 }else{
 
-const { error } = await supabase.auth.signUp({
+const { error } = await client.auth.signUp({
 email,
 password
 });
@@ -179,7 +196,7 @@ return;
 }
 
 document.getElementById("msg").innerText =
-"Verification email sent. Please check inbox.";
+"Verification email sent. Check your inbox.";
 
 }
 
