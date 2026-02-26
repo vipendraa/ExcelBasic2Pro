@@ -6,11 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Basic2Pro Login</title>
 
-<!-- Google Identity Script -->
+<!-- Google Identity -->
 
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 
 <style>
+
 body{
 margin:0;
 font-family:Arial, sans-serif;
@@ -24,26 +25,28 @@ height:100vh;
 
 .container{
 background:#111c2a;
-padding:40px;
-border-radius:12px;
+padding:45px;
+border-radius:14px;
 text-align:center;
 box-shadow:0 10px 30px rgba(0,0,0,.4);
+width:320px;
 }
 
-h2{
+h1{
 color:#4cffb2;
-margin-bottom:20px;
+margin-bottom:10px;
 }
 
 p{
 font-size:14px;
 opacity:.8;
-margin-bottom:20px;
+margin-bottom:25px;
 }
-.google-btn{
-display:flex;
-justify-content:center;
+
+.footer{
 margin-top:20px;
+font-size:12px;
+opacity:.6;
 }
 
 </style>
@@ -54,36 +57,51 @@ margin-top:20px;
 
 <div class="container">
 
-<h2>Welcome to Basic2Pro</h2>
-<p>Sign in to continue</p>
+<h1>Basic2Pro</h1>
+<p>Learn Excel from Basic to Pro</p>
+
+<!-- Google Login -->
 
 <div id="g_id_onload"
 data-client_id="724957971033-5ie7iqli2srsahtq29vk6bu16k52r9cp.apps.googleusercontent.com"
-data-callback="handleCredentialResponse">
+data-callback="handleCredentialResponse"
+data-auto_select="true">
 </div>
 
-<div style="display:flex; justify-content:center; margin-top:20px;">
-    <div class="g_id_signin"
-        data-type="standard"
-        data-size="large"
-        data-theme="outline"
-        data-text="sign_in_with"
-        data-shape="rectangular"
-        data-logo_alignment="left">
-    </div>
+<div style="display:flex; justify-content:center;">
+<div class="g_id_signin"
+data-type="standard"
+data-size="large"
+data-theme="outline"
+data-text="sign_in_with"
+data-shape="rectangular"
+data-logo_alignment="left">
+</div>
+</div>
+
+<div class="footer">
+© Basic2Pro
 </div>
 
 </div>
 
 <script>
 
+/* AUTO LOGIN IF TOKEN EXISTS */
+
+let existing = localStorage.getItem("googleUserToken");
+
+if(existing){
+window.location = "roadmap.html";
+}
+
+/* GOOGLE LOGIN RESPONSE */
+
 function handleCredentialResponse(response){
 
-/* Save user token locally */
 localStorage.setItem("googleUserToken", response.credential);
 
-/* Redirect to roadmap page */
-window.location.href = "roadmap.html";
+window.location = "roadmap.html";
 
 }
 
