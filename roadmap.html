@@ -49,17 +49,6 @@ let userPlan = localStorage.getItem(planKey) || "free";
 function goPro(){
 window.location = "pricing.html";
 }
-
-function logout(){
-
-google?.accounts?.id?.disableAutoSelect?.();
-
-localStorage.removeItem("googleUserToken");
-
-window.location = "index.html";
-
-}
-
 </script>
 
 <style>
