@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 1 — Excel Interface</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(180deg,#0b1724,#07111b);
+color:white;
+padding:20px;
+}
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.title{
+color:#4cffb2;
+font-size:22px;
+font-weight:bold;
+}
+
+.back{
+padding:8px 14px;
+border:none;
+border-radius:8px;
+background:#4cffb2;
+color:black;
+cursor:pointer;
+font-weight:bold;
+}
+
+.content{
+max-width:800px;
+margin:auto;
+line-height:1.6;
+}
+
+.box{
+background:#111c2a;
+padding:20px;
+border-radius:12px;
+margin-top:20px;
+}
+
+</style>
+
+<script>
+
+/* LOGIN PROTECTION */
+
+let token = localStorage.getItem("googleUserToken");
+
+if(!token){
+window.location = "index.html";
+}
+
+</script>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<div class="title">Lesson 1 — Excel Interface</div>
+
+<button class="back" onclick="goBack()">← Back to Roadmap</button>
+
+</div>
+
+<div class="content">
+
+<div class="box">
+
+<h3>What is Excel Interface?</h3>
+
+<p>
+Microsoft Excel interface is the workspace where you create spreadsheets.
+It includes ribbon, cells, rows, columns, formula bar and worksheet area.
+</p>
+
+<p>
+Understanding the interface is the first step to becoming an Excel expert.
+</p>
+
+</div>
+
+<div class="box">
+
+<h3>Main Parts of Excel</h3>
+
+<ul>
+<li>Ribbon Menu</li>
+<li>Quick Access Toolbar</li>
+<li>Worksheet Area</li>
+<li>Rows and Columns</li>
+<li>Formula Bar</li>
+<li>Status Bar</li>
+</ul>
+
+</div>
+
+</div>
+
+<script>
+
+function goBack(){
+window.location="roadmap.html";
+}
+
+</script>
+
+</body>
+</html>
