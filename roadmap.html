@@ -316,3 +316,46 @@
           14
          </div>
          <div class="flex-grow bg-white rounded-2xl p-4 border-2 border-gray-200 group-hover:border-purple-300 gr
+          <script>
+
+function continueAsGuest(){
+document.getElementById("login-screen").style.display="none";
+document.getElementById("main-content").classList.remove("hidden");
+}
+
+function logout(){
+location.reload();
+}
+
+let completedLevels = 0;
+
+function updateProgress(){
+
+let progress = (completedLevels / 30) * 100;
+
+document.getElementById("progress-bar").style.width = progress + "%";
+
+document.getElementById("progress-text").innerText = completedLevels + " / 30";
+
+}
+
+</script>
+<script>
+
+function continueAsGuest(){
+
+document.getElementById("login-screen").style.display="none";
+document.getElementById("main-content").classList.remove("hidden");
+
+document.getElementById("welcome-msg").innerText =
+"Welcome! Start your Excel learning journey.";
+
+}
+
+function logout(){
+location.reload();
+}
+ </script>
+</body>
+</html>
+         
